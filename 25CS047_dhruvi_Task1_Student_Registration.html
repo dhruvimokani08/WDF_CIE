@@ -42,12 +42,12 @@
 
     <div class="input-box">
         <label for="studentName">Student Name:</label>
-        <input type="text" id="studentname">
+        <input type="text" id="studentName" required>/*change the ID studentname to studentName and added required*/
     </div>
 
     <div class="input-box">
         <label for="email">Email:</label>
-        <input type="text" id="email">
+        <input type="email" id="email" required> /*type should be email not text and added required */
     </div>
 
     <div class="input-box">
@@ -57,13 +57,13 @@
 
     <div class="input-box">
         <label for="dob">Date of Birth:</label>
-        <input type="text" id="dob">
+        <input type="date" id="dob">/*type should be date not text */
     </div>
 
     <div class="input-box">
         <label for="course">Course:</label>
 
-        <select id="course">
+        <select id="course" required>/*Added Required*/
             <option value="">Select Course</option>
             <option value="BCA">BCA</option>
             <option value="MCA">MCA</option>
@@ -108,8 +108,9 @@ function submitStudent() { /*Renamed the function as function called submitStude
     var course =
         document.getElementById("course").value;
 
-    if (name == "" && email == "") {
-        alert("Student Name and Email are required");
+    // Validate required fields
+    if (name === "" || email === "" || course === "") {
+        alert("Student Name, Email and Course are required");
         return;
     }
 
@@ -121,13 +122,14 @@ function submitStudent() { /*Renamed the function as function called submitStude
     }
 
     var choice =
-        confirm("Do you want to cancel registration?");
+        confirm("Do you want to submit the registration?"); //changed msg from cancel to submit
 
     if (choice == true) {
         alert("Registration successful");
     }
 
-    document.getElementById("result").innerHtml =
+//Changed it to document.getElementById("resultBox").innerHTML.
+    document.getElementById("resultBox").innerHTML =
         "<h2>Student Information</h2>" +
         "Name: " + name +
         "<br>Email: " + email +
