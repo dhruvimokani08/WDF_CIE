@@ -17,7 +17,7 @@
         #studentForm { /*student Form is a ID and # is needed to add css on ID*/
             width: 450px;
             border: 2px solid black;
-             padding : 20px; /*= instead of : */
+            padding : 20px; /*= instead of : */
             margin: 20px auto;
         }
 
@@ -42,12 +42,14 @@
 
     <div class="input-box">
         <label for="studentName">Student Name:</label>
-        <input type="text" id="studentName" required>/*change the ID studentname to studentName and added required*/
+        <!--change the ID studentname to studentName and added required-->
+        <input type="text" id="studentName" required>
     </div>
 
     <div class="input-box">
         <label for="email">Email:</label>
-        <input type="email" id="email" required> /*type should be email not text and added required */
+        <!--type should be email not text and added required-->
+        <input type="email" id="email" required>
     </div>
 
     <div class="input-box">
@@ -57,13 +59,15 @@
 
     <div class="input-box">
         <label for="dob">Date of Birth:</label>
-        <input type="date" id="dob">/*type should be date not text */
+        <!--type should be date not text-->
+        <input type="date" id="dob">
     </div>
 
     <div class="input-box">
         <label for="course">Course:</label>
 
-        <select id="course" required>/*Added Required*/
+        <!--Added Required-->
+        <select id="course" required>
             <option value="">Select Course</option>
             <option value="BCA">BCA</option>
             <option value="MCA">MCA</option>
@@ -79,7 +83,8 @@
         <input type="checkbox" id="js" value="JavaScript"> JavaScript
     </div>
 
-    <button type="submit" onclick="submitStudent()">
+    <!--parameter event-->
+    <button type="submit" onclick="submitStudent(event)">
         Register Student
     </button>
 
@@ -91,7 +96,8 @@
 
 <script>
 
-function submitStudent() { /*Renamed the function as function called submitStudent()*/
+function submitStudent(event) { /*Renamed the function as function called submitStudent()*/
+    event.preventDefault();
 
     var name =
         document.getElementById("studentName").value;
@@ -108,35 +114,63 @@ function submitStudent() { /*Renamed the function as function called submitStude
     var course =
         document.getElementById("course").value;
 
-    // Validate required fields
+    // Validate required fields and changed to || 
     if (name === "" || email === "" || course === "") {
         alert("Student Name, Email and Course are required");
         return;
     }
 
-    var semester =
-        prompt("Enter Current Semester");
+    
+    // Get and validate semester
+    var semester = prompt("Enter Current Semester");
 
-    if (semester == "") {
-        alert("Semester not entered");
+    if (semester === null || semester.trim() === "") {
+        alert("Valid semester is required");
+        return;
+    }
+
+    semester = semester.trim();
+
+    // Check expertise
+    var expertise = [];
+
+    if (document.getElementById("html").checked) {
+        expertise.push(document.getElementById("html").value);
+    }
+
+    if (document.getElementById("css").checked) {
+        expertise.push(document.getElementById("css").value);
+    }
+
+    if (document.getElementById("js").checked) {
+        expertise.push(document.getElementById("js").value);
+    }
+
+    if (expertise.length === 0) {
+        alert("Please select at least one expertise");
+        return;
     }
 
     var choice =
         confirm("Do you want to submit the registration?"); //changed msg from cancel to submit
 
-    if (choice == true) {
+    // Changed: Registration result and success message are shown only when user selects OK.
+    if (choice === true) {
+
+        //Changed it to document.getElementById("resultBox").innerHTML.
+        document.getElementById("resultBox").innerHTML =
+            "<h2>Student Information</h2>" +
+            "Name: " + name +
+            "<br>Email: " + email +
+            "<br>Mobile: " + mobile +
+            "<br>DOB: " + dob +
+            "<br>Course: " + course +
+            "<br>Semester: " + semester +
+            // Changed: Added selected expertise to the registration result.
+            "<br>Expertise: " + expertise.join(", ");
+
         alert("Registration successful");
     }
-
-//Changed it to document.getElementById("resultBox").innerHTML.
-    document.getElementById("resultBox").innerHTML =
-        "<h2>Student Information</h2>" +
-        "Name: " + name +
-        "<br>Email: " + email +
-        "<br>Mobile: " + mobile +
-        "<br>DOB: " + dob +
-        "<br>Course: " + course +
-        "<br>Semester: " + semester;
 
 }
 
