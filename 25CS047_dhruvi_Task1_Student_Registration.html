@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color :#f2f2f2; /*missing :*/
+        }
+
+        #student-title { /*student title is a ID and # is needed to add css on ID where here . is used but . is for class*/
+            text-align: center;
+            color: darkblue;
+        }
+
+        #studentForm { /*student Form is a ID and # is needed to add css on ID*/
+            width: 450px;
+            border: 2px solid black;
+             padding : 20px; /*= instead of : */
+            margin: 20px auto;
+        }
+
+        .input-box {
+            margin-bottom: 12px;
+        }
+
+        #resultBox {
+            width: 450px;
+            border: 1px solid green;
+            padding: 15px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1 id="student-title">Student Registration Form</h1>
+
+<form id="studentForm">
+
+    <div class="input-box">
+        <label for="studentName">Student Name:</label>
+        <input type="text" id="studentname">
+    </div>
+
+    <div class="input-box">
+        <label for="email">Email:</label>
+        <input type="text" id="email">
+    </div>
+
+    <div class="input-box">
+        <label for="mobile">Mobile Number:</label>
+        <input type="number" id="mobile">
+    </div>
+
+    <div class="input-box">
+        <label for="dob">Date of Birth:</label>
+        <input type="text" id="dob">
+    </div>
+
+    <div class="input-box">
+        <label for="course">Course:</label>
+
+        <select id="course">
+            <option value="">Select Course</option>
+            <option value="BCA">BCA</option>
+            <option value="MCA">MCA</option>
+            <option value="BTech">B.Tech</option>
+        </select>
+    </div>
+
+    <div class="input-box">
+        <label>Expertise:</label>
+
+        <input type="checkbox" id="html" value="HTML"> HTML
+        <input type="checkbox" id="css" value="CSS"> CSS
+        <input type="checkbox" id="js" value="JavaScript"> JavaScript
+    </div>
+
+    <button type="submit" onclick="submitStudent()">
+        Register Student
+    </button>
+
+</form>
+
+<div id="resultBox">
+    Registration information will appear here.
+</div>
+
+<script>
+
+function showStudent() {
+
+    var name =
+        document.getElementById("studentName").value;
+
+    let email =
+        document.getElementById("email").value;
+
+    const mobile =
+        document.getElementById("mobile").value;
+
+    let dob =
+        document.getElementById("dob").value;
+
+    var course =
+        document.getElementById("course").value;
+
+    if (name == "" && email == "") {
+        alert("Student Name and Email are required");
+        return;
+    }
+
+    var semester =
+        prompt("Enter Current Semester");
+
+    if (semester == "") {
+        alert("Semester not entered");
+    }
+
+    var choice =
+        confirm("Do you want to cancel registration?");
+
+    if (choice == true) {
+        alert("Registration successful");
+    }
+
+    document.getElementById("result").innerHtml =
+        "<h2>Student Information</h2>" +
+        "Name: " + name +
+        "<br>Email: " + email +
+        "<br>Mobile: " + mobile +
+        "<br>DOB: " + dob +
+        "<br>Course: " + course +
+        "<br>Semester: " + semester;
+
+}
+
+</script>
+
+</body>
+</html>
